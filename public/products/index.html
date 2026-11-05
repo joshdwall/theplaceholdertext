@@ -291,13 +291,17 @@
         }
 
         catalog.querySelectorAll("[data-gallery]").forEach((box) => {
-          const list = box.querySelectorAll(".pgallery-strip [data-full]");
+          const media = box.querySelector(".pcard-media");
+          if (!media) return;
+          const strip = box.querySelector(".pgallery-strip");
+          if (strip && strip.parentElement !== media) media.append(strip);
+          const list = media.querySelectorAll(".pgallery-strip [data-full]");
           if (list.length < 2) return;
           const nav = document.createElement("div");
           nav.className = "pgallery-nav";
           nav.innerHTML =
             '<button type="button" data-gallery-prev aria-label="Previous image">‹</button><button type="button" data-gallery-next aria-label="Next image">›</button>';
-          box.append(nav);
+          media.append(nav);
         });
 
         catalog.addEventListener("click", (event) => {

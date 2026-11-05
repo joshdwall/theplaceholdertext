@@ -585,7 +585,7 @@ body.projects {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap: 0.75rem;
-  align-items: start;
+  align-items: stretch;
   min-width: 0;
 }
 
@@ -599,8 +599,11 @@ body.projects {
 }
 
 .pcard-media {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   max-width: 100%;
+  height: 100%;
 }
 
 .summary {
@@ -643,7 +646,8 @@ body.projects {
 .pgallery-nav {
   display: flex;
   gap: 0.4rem;
-  margin-top: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.45rem;
 }
 
 .pgallery-nav button {
@@ -662,9 +666,10 @@ body.projects {
 }
 
 .pgallery-cap {
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
   color: var(--color-muted);
   font-size: 0.78rem;
+  text-align: center;
 }
 
 .pgallery-strip {
