@@ -643,7 +643,7 @@ body.projects {
 .pgallery-nav {
   display: flex;
   gap: 0.4rem;
-  margin-top: 0.35rem;
+  margin-top: 0.45rem;
 }
 
 .pgallery-nav button {

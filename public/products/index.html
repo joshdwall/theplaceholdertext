@@ -280,19 +280,24 @@
           }
           if (cap) cap.textContent = btn.dataset.cap || "";
           list.forEach((b) => b.classList.toggle("is-on", b === btn));
-          btn.scrollIntoView({ block: "nearest", inline: "nearest" });
+          const strip = btn.closest(".pgallery-strip");
+          if (strip) {
+            const edge = 8;
+            const left = btn.offsetLeft - edge;
+            const right = btn.offsetLeft + btn.offsetWidth + edge;
+            if (left < strip.scrollLeft) strip.scrollLeft = left;
+            else if (right > strip.scrollLeft + strip.clientWidth) strip.scrollLeft = right - strip.clientWidth;
+          }
         }
 
         catalog.querySelectorAll("[data-gallery]").forEach((box) => {
           const list = box.querySelectorAll(".pgallery-strip [data-full]");
           if (list.length < 2) return;
-          const frame = box.querySelector(".pcard-frame");
-          if (!frame) return;
           const nav = document.createElement("div");
           nav.className = "pgallery-nav";
           nav.innerHTML =
             '<button type="button" data-gallery-prev aria-label="Previous image">‹</button><button type="button" data-gallery-next aria-label="Next image">›</button>';
-          frame.after(nav);
+          box.append(nav);
         });
 
         catalog.addEventListener("click", (event) => {
