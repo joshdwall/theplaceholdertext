@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "theplaceholdersite-business",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": true
+  },
+  "vars": {
+    "CONTACT_TO": "joshdwall@gmail.com",
+    "CONTACT_FROM": "info@theplaceholdertext.com"
+  },
+  "send_email": [
+    {
+      "name": "SEND_EMAIL",
+      "destination_address": "joshdwall@gmail.com"
+    },
+    {
+      "name": "SEND_VISITOR"
+    }
+  ],
+  "routes": [
+    { "pattern": "theplaceholdertext.com", "custom_domain": true },
+    { "pattern": "www.theplaceholdertext.com", "custom_domain": true }
+  ]
+}

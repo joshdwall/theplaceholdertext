@@ -1,0 +1,15 @@
+{
+  "site": "theplaceholdersite-business",
+  "publicUrl": "https://theplaceholdertext.com/",
+  "wwwUrl": "https://www.theplaceholdertext.com/",
+  "workerName": "theplaceholdersite-business",
+  "infisical": {
+    "projectId": "41982513-3430-4531-a227-9aa124fe024d",
+    "env": "prod",
+    "cloudflarePath": "/cloudflare",
+    "tokenKey": "CLOUDFLARE_API_TOKEN",
+    "accountKey": "CLOUDFLARE_ACCOUNT_ID",
+    "agentsWriteKey": "agents-write"
+  },
+  "verifyPaths": ["/", "/products/", "/theme/moss.css"]
+}

@@ -1,0 +1,7 @@
+node_modules/
+.wrangler/
+.dev.vars
+.secrets/
+tools/cf-api.mjs
+tools/deploy.mjs
+*.log

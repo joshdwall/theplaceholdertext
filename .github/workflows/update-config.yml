@@ -1,0 +1,43 @@
+name: Update ThePlaceholderText config
+
+# Confirms public/config/site.json. The live Worker reads that file from GitHub
+# (raw main) and does not need a Worker promote for color or copy changes.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'public/config/**'
+
+concurrency:
+  group: config-theplaceholdersite-business
+  cancel-in-progress: false
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Check config
+        run: |
+          set -euo pipefail
+          node scripts/promote.mjs config
+          {
+            echo "## ThePlaceholderText config"
+            echo "- sha: \`$GITHUB_SHA\`"
+            echo "- source: GitHub \`main\` \`public/config/site.json\`"
+            echo "- live: https://theplaceholdertext.com/"
+          } >> "$GITHUB_STEP_SUMMARY"

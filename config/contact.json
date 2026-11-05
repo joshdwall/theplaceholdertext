@@ -1,0 +1,5 @@
+{
+  "from": "info@theplaceholdertext.com",
+  "to": "joshdwall@gmail.com",
+  "note": "Change `to`, then run node tools/set-contact-to.mjs. Inbound Email Routing and the contact form both read this file."
+}

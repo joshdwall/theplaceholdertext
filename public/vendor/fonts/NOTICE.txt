@@ -1,0 +1,5 @@
+Bricolage Grotesque — Copyright 2022 The Bricolage Grotesque Project Authors (https://github.com/atelier-anchor/bricolage). SIL Open Font License 1.1.
+Literata — Copyright 2017 The Literata Project Authors (https://github.com/googlefonts/literata). SIL Open Font License 1.1. See OFL.txt.
+Source Serif 4 — Copyright 2014–2023 Adobe, with Reserved Font Name "Source". SIL Open Font License 1.1.
+
+The woff2 files were downloaded from Fontsource, which redistributes these fonts.

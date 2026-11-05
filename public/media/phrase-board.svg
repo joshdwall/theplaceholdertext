@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Phrase Board, image coming">
+  <rect width="640" height="400" fill="#1b4d32"/>
+  <rect x="36" y="36" width="568" height="328" fill="none" stroke="#e5f0e7" stroke-width="2"/>
+  <text x="320" y="188" text-anchor="middle" fill="#f4f7f2" font-family="Segoe UI, sans-serif" font-size="42">Phrase Board</text>
+  <text x="320" y="230" text-anchor="middle" fill="#c5d6c4" font-family="Segoe UI, sans-serif" font-size="18">Image coming</text>
+</svg>

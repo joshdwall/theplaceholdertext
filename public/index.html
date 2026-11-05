@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>__SITE_NAME__ — __SITE_TAGLINE__</title>
+    <meta name="description" content="__SITE_SUMMARY__" />
+    __FONT_LINK__
+    <style>:root { --brand-font: __FONT_FAMILY__; }</style>
+    <link rel="stylesheet" href="/theme/moss.css" />
+  </head>
+  <body class="home">
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="brand" href="/">__SITE_NAME__</a>
+      <nav aria-label="Sections">
+        <ul class="nav-links">
+          <li><a href="/" aria-current="page">Home</a></li>
+          <li><a href="/products/">Projects</a></li>
+          <li><a class="nav-cta" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main" class="page-field">
+      <img class="page-bg" src="__HERO_IMAGE__" alt="__HERO_ALT__" />
+      <div class="page-shade" aria-hidden="true"></div>
+
+      <section class="hero" id="top">
+        <div class="hero-stage">
+          <div class="hero-copy">
+            <h1 class="hero-brand">__SITE_NAME__</h1>
+            <p class="hero-tag">__SITE_TAGLINE__</p>
+          </div>
+          <p class="panel-label" id="work">What we put in place</p>
+          <div class="hero-cards" aria-label="What we put in place">
+            <article class="hero-card">
+              <h3>Workflows become automations</h3>
+              <p>Watch the real sequence. Encode it.</p>
+            </article>
+            <article class="hero-card">
+              <h3>Less friction between desks</h3>
+              <p>One shared path. No inbox death.</p>
+            </article>
+            <article class="hero-card">
+              <h3>Tools people will use</h3>
+              <p>Fit the fix to the screen already open.</p>
+            </article>
+            <article class="hero-card">
+              <h3>Learned on the job</h3>
+              <p>Exceptions from the people who hit them.</p>
+            </article>
+            <article class="hero-card">
+              <h3>More paid work, same desk</h3>
+              <p>Busywork leaves. The person stays.</p>
+            </article>
+          </div>
+
+          <div class="contact-copy" id="contact">
+            <p class="eyebrow">Contact</p>
+            <h2 class="contact-title">Talk with us</h2>
+            <p class="intro">A person reads this and replies.</p>
+          </div>
+          <form method="post" action="/api/contact" class="contact-form" aria-label="Contact">
+            <div id="form-sent" class="note is-hidden" role="status">Message sent. Confirmation is on its way.</div>
+            <div id="form-slow" class="note note-warn is-hidden" role="status">Message sent. If you do not hear back, try again in a few minutes.</div>
+            <div id="form-sent-noconfirm" class="note note-warn is-hidden" role="status">Message sent. Confirmation mail failed; we will still reply.</div>
+            <div id="form-limited" class="note note-warn is-hidden" role="status">Too many sends. Wait a minute and try again.</div>
+            <div id="form-error" class="note note-bad is-hidden" role="status">That message did not send. Try again.</div>
+            <label class="contact-field">
+              Email
+              <input id="email" name="email" type="email" required maxlength="200" autocomplete="email" />
+            </label>
+            <label class="contact-field contact-field--message">
+              Message
+              <textarea id="message" name="message" rows="2" required maxlength="4000"></textarea>
+            </label>
+            <div class="hp" aria-hidden="true">
+              <label>
+                Company URL
+                <input id="company_url" name="company_url" tabindex="-1" autocomplete="off" />
+              </label>
+            </div>
+            <div class="contact-actions">
+              <div
+                class="cf-turnstile"
+                data-sitekey="0x4AAAAAAFvwJ0wD5EGS9EUQ"
+                data-size="normal"
+                data-theme="dark"
+              ></div>
+              <button class="button" type="submit">Send</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <p class="page-credit">__HERO_CREDIT__</p>
+    </main>
+    <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "911020731a68405eb5bfb1748cf2c8cd"}'></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script>
+      const form = document.querySelector("form[action='/api/contact']");
+      if (form) {
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const button = form.querySelector("button[type=submit]");
+          form.querySelectorAll(".note").forEach((note) => note.classList.add("is-hidden"));
+          button.disabled = true;
+          const label = button.textContent;
+          button.textContent = "Sending…";
+          let code = "error";
+          try {
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            });
+            const data = await res.json();
+            code = data.code || "error";
+          } catch {
+            code = "error";
+          }
+          const note = document.getElementById("form-" + code);
+          if (note) note.classList.remove("is-hidden");
+          button.disabled = false;
+          button.textContent = label;
+          if (code === "sent" || code === "slow") form.reset();
+          if (window.turnstile) window.turnstile.reset();
+        });
+      }
+    </script>
+  </body>
+</html>
