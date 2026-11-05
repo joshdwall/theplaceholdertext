@@ -29,7 +29,6 @@
         <div class="section-inner products-intro">
           <p class="eyebrow">Projects</p>
           <h1>What we have built</h1>
-          <p class="intro">Selected work. Phrase Board is the first product we are taking to market.</p>
         </div>
         <div class="catalog">
 <article class="pcard" id="phrase-board" data-gallery>
@@ -268,11 +267,49 @@
           render();
         }
 
+        function showSlide(box, nextIndex) {
+          const list = [...box.querySelectorAll(".pgallery-strip [data-full]")];
+          if (list.length < 2) return;
+          const i = (nextIndex + list.length) % list.length;
+          const btn = list[i];
+          const heroImg = box.querySelector(".pgallery-hero");
+          const cap = box.querySelector(".pgallery-cap");
+          if (heroImg) {
+            heroImg.src = btn.dataset.full;
+            heroImg.alt = btn.dataset.cap || "";
+          }
+          if (cap) cap.textContent = btn.dataset.cap || "";
+          list.forEach((b) => b.classList.toggle("is-on", b === btn));
+          btn.scrollIntoView({ block: "nearest", inline: "nearest" });
+        }
+
+        catalog.querySelectorAll("[data-gallery]").forEach((box) => {
+          const list = box.querySelectorAll(".pgallery-strip [data-full]");
+          if (list.length < 2) return;
+          const frame = box.querySelector(".pcard-frame");
+          if (!frame) return;
+          const nav = document.createElement("div");
+          nav.className = "pgallery-nav";
+          nav.innerHTML =
+            '<button type="button" data-gallery-prev aria-label="Previous image">‹</button><button type="button" data-gallery-next aria-label="Next image">›</button>';
+          frame.after(nav);
+        });
+
         catalog.addEventListener("click", (event) => {
+          const prev = event.target.closest("[data-gallery-prev]");
+          const next = event.target.closest("[data-gallery-next]");
           const btn = event.target.closest(".pgallery-strip [data-full]");
           const frame = event.target.closest(".pcard-frame");
           const box = event.target.closest("[data-gallery]");
           if (!box) return;
+
+          if (prev || next) {
+            const list = [...box.querySelectorAll(".pgallery-strip [data-full]")];
+            const on = box.querySelector(".pgallery-strip [data-full].is-on");
+            const idx = on ? list.indexOf(on) : 0;
+            showSlide(box, (idx >= 0 ? idx : 0) + (next ? 1 : -1));
+            return;
+          }
 
           if (btn) {
             const heroImg = box.querySelector(".pgallery-hero");

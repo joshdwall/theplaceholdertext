@@ -640,6 +640,27 @@ body.projects {
   pointer-events: none;
 }
 
+.pgallery-nav {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.pgallery-nav button {
+  flex: 1;
+  height: 2rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-card);
+  color: var(--color-bar-ink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.pgallery-nav button:hover {
+  border-color: var(--color-moss, #2f6b45);
+}
+
 .pgallery-cap {
   margin-top: 0.25rem;
   color: var(--color-muted);
