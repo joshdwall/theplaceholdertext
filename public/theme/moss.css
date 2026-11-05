@@ -665,9 +665,12 @@ body.projects {
 }
 
 .pgallery-cap {
-  margin-top: 0.3rem;
+  display: block;
+  width: 100%;
+  margin: 0.3rem 0 0;
   color: var(--color-muted);
   font-size: 0.78rem;
+  font-style: italic;
   text-align: center;
 }
 
